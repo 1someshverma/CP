@@ -2,7 +2,6 @@
 #define long long long int
 using namespace std;
  
- 
 void solve_test() {
     int n, m;
     cin >> n >> m;
