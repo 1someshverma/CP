@@ -47,11 +47,8 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 #define mod 1000000007
-
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-
-
     ll test=1;
 cin>>test;
     while(test--)
