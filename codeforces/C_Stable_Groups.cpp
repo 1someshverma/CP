@@ -59,7 +59,6 @@ void solve()
  
     sort(all(a));
  
- 
     vector<long long> diff;
  
     for(int i = 1; i < n; ++i){
