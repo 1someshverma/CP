@@ -68,13 +68,6 @@ void solve()
     			break;
     		}
     		ans += string(r, 'R');
-    		ans += string(u, 'U');
-    		cur = a[i];
-    	}
-    	
-    	if (ok)
-    	    cout << "YES" << endl << ans << endl;
-
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
