@@ -65,7 +65,7 @@ void solve()
 	  (dp[i][j] += dp[i][j-1]) %= mod;
 	}
       } else {
-	dp[i][j] = 0;
+	    dp[i][j] = 0;
       }
     }
   }
