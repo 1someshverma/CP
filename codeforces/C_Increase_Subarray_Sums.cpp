@@ -56,12 +56,34 @@ void solve()
     fo(i,n){
         cin>>p[i];
     }
-    ll sum=accumulate(all(p),0);
-    fo(i,n){
-        cout<<sum<<" ";
-        sum+=x;
+    vector<ll> ans(n,INT32_MIN),sum(n+1);
+    int j;
+    sum[0]=p[0];
+    for(i=1;i<n;i++){
+       sum[i]+=sum[i-1]+p[i];
     }
-    cout<<sum<<endl;
+    fo(i,n){
+        for(j=i+1;j<n;j++){
+            if(ans[j-i+1]<sum[j]-sum[i]+p[i]){
+                ans[j-i+1]=sum[j]-sum[i]+p[i];
+            }
+            // if(ans[j-i]==0){
+            //     ans[j-i].push_back(sum[j]-sum[i]);
+            // }else{
+            //     if(ans[j-i][0]>sum[j]-sum[i]){
+            //         ans[j-i][0]=sum[j]-sum[i];
+            //     }
+            // }
+        }
+    }
+    ans[0]=0;
+    ans[1]=*max_element(all(p));
+    fo(i,n+1){
+        ll x=*max_element(ans.begin()+i,ans.end());
+        ll so=x+i*x;
+        cout<<so<<" ";
+    }
+    cout<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
