@@ -47,39 +47,32 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 #define mod 1000000007
-ll sumOFDiv(ll x){
-    ll ans=0;
-    for(int i=1;i<=x;i++){
-        if(x%i==0)
-            (ans+=i)%mod;
-    }
-    return ans;
-}
-// vector<ll> factors(ll n) {
-// vector<ll> f;
-// for (ll x = 2; x*x <= n; x++) {
-// while (n%x == 0) {
-// f.push_back(x);
-// n /= x;
-// }
-// }
-// if (n > 1) f.push_back(n);
-// return f;
-// }
 void solve()
 {
-    ll n;
-    cin>>n;
-    ll m=0;
-    for(int i=1;i<=n;i++){
-        (m+=sumOFDiv(i))%mod;
+    int n,q;
+    cin>>n>>q;
+    vl p(n);
+    int i;
+    fo(i,n){
+        cin>>p[i];
     }
-    // vl fact=factors(n);
-    // ll i;
-    // fo(i,fact.size()){
-    //     m+=fact[i]%mod;
-    // }
-    cout<<m<<endl;
+    sort(rall(p));
+    ll sum[n]={0};
+    sum[0]=p[0];
+    for(int j=1;j<n;j++){
+        sum[j]=sum[j-1]+p[j];
+    }
+    while(q--){
+        ll x,y;
+        cin>>x>>y;
+        x--,y--;
+        if(x==y){
+            cout<<sum[x]<<endl;
+            continue;
+        }
+        ll ans=sum[x]-sum[x-y-1];
+        cout<<ans<<endl;
+    }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

@@ -47,46 +47,44 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 #define mod 1000000007
-ll sumOFDiv(ll x){
-    ll ans=0;
-    for(int i=1;i<=x;i++){
-        if(x%i==0)
-            (ans+=i)%mod;
-    }
-    return ans;
-}
-// vector<ll> factors(ll n) {
-// vector<ll> f;
-// for (ll x = 2; x*x <= n; x++) {
-// while (n%x == 0) {
-// f.push_back(x);
-// n /= x;
-// }
-// }
-// if (n > 1) f.push_back(n);
-// return f;
-// }
 void solve()
 {
-    ll n;
+    int n;
     cin>>n;
-    ll m=0;
-    for(int i=1;i<=n;i++){
-        (m+=sumOFDiv(i))%mod;
+    string s,t;
+    cin>>s>>t;
+    int i=0,j=0;
+    fo(i,n){
+        
     }
-    // vl fact=factors(n);
-    // ll i;
-    // fo(i,fact.size()){
-    //     m+=fact[i]%mod;
+    // string s1,s2;
+    // for(int i=0;i<n;i++){
+    //     if(s[i]!='b'){
+    //         s1.push_back(s[i]);
+    //     }
+    //     if(t[i]!='b'){
+    //         s2.push_back(t[i]);
+    //     }
     // }
-    cout<<m<<endl;
+    // if((s=="ba" && t=="ab") || (s=="cb" && t=="bc")){
+    //     cout<<"NO"<<endl;
+    //     return;
+    // }
+    // // if(n==2){
+    // //     if(s=="ba"&&t=="ab")
+    // // }
+    // if(s1==s2){
+    //     cout<<"YES"<<endl;
+    // }else{
+    //     cout<<"NO"<<endl;
+    // }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();
