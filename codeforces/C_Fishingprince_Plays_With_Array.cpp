@@ -49,40 +49,49 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    int n,m;
+    cin>>n>>m;
+    vl p(n),q;
+    ll i;
+    fo(i,n){
+        cin>>p[i];
+        ll x=p[i];
+        int cnt=0;
+        while(x%m==0){
+            cnt++;
+            x/=m;
         }
+        ll y=(p[i]/pow(m,cnt));
+        for(int j=0;j<(pow(m,cnt));j++)
+            q.push_back(y);
     }
-
+    ll k;
+    cin>>k;
+    vl b(k),r;
+    fo(i,k){
+        cin>>b[i];
+        ll x=b[i];
+        int cnt=0;
+        while(x%m==0){
+            cnt++;
+            x/=m;
+        }
+        ll y=(b[i]/pow(m,cnt));
+        for(int j=0;j<(pow(m,cnt));j++)
+            r.push_back(y);
+    }
+    if(q==r){
+        cout<<"Yes"<<endl;
+    }else{
+        cout<<"No"<<endl;
+    }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

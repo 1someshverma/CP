@@ -49,40 +49,43 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
-        }
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    map<int,int> map;
+    for(int i=1;i<=n;i++){
+        int x;
+        cin>>x;
+        map[i]=x;
     }
-
+    ll ans=1;
+    for(int i=1;i<=n;i++){
+        ll cnt=1;
+         bool flag=true;
+        int j=map[i];
+       
+        while(i!=j){
+            if(s[j-1]!=s[map[j]-1])
+                flag=false;
+            cnt++;
+            j=map[j];
+             
+        }
+        if(flag){
+            cnt=1;
+        }
+        ans=(ans*cnt)/__gcd(ans,cnt);
+        // cout<<cnt<<endl;
+    }
+    cout<<ans<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

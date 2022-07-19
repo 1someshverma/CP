@@ -1,5 +1,6 @@
 #include<iostream>
 #include<algorithm>
+#include<vector>
 using namespace std;
 struct process{
     char processID;
@@ -9,11 +10,23 @@ struct process{
     int waitingTime;
     int turnAroundTime;
 };
-void drawGanttChart(process pro,int quantum,int n){
-    
+vector<pair<int,int>> gant;
+void drawGanttChart(){
+    cout<<"Gantt Chart"<<endl;
+    for(int i=0;i<gant.size();i++){
+       cout<<"P"<<gant[i].first<<"\t";
+    }
+    cout<<endl<<"0\t";
+    for(int i=0;i<gant.size();i++){
+        cout<<gant[i].second<<"\t";
+    }
+    cout<<endl;
 }
 void findWaitingTime(process *pro,int quantum,int n){
     int t=0;
+     for(int i=0;i<n;i++){
+        pro[i].remTime=pro[i].bTime;
+    }
     while (1)
     {
        bool done=true;
@@ -22,17 +35,18 @@ void findWaitingTime(process *pro,int quantum,int n){
                done=false;
                if(pro[i].remTime>quantum){
                    t+=quantum;
-                   pro[i].bTime-=quantum;
-               }
-           }else{
+                   pro[i].remTime-=quantum;
+                   gant.push_back({i,t});
+               }else{
                t+=pro[i].remTime;
                pro[i].waitingTime=t-pro[i].bTime;
-               pro[i].bTime=0;
+               pro[i].remTime=0;
+               gant.push_back({i,t});
+           }
            }
        }
-       if(done==true){
+        if(done==true)
            break;
-       }
     }
 }
 void findTurnAroundTime(process *pro,int n){
@@ -67,14 +81,14 @@ int main(){
         cin>>pro[i].processID>>pro[i].aTime>>pro[i].bTime;
         pro[i].remTime=pro[i].bTime;
     }
-    for(int i=0;i<n;i++){
-        cout<<pro[i].processID<<" "<<pro[i].aTime<<" "<<pro[i].bTime<<endl;
-    }
+    // for(int i=0;i<n;i++){
+    //     cout<<pro[i].processID<<" "<<pro[i].aTime<<" "<<pro[i].bTime<<endl;
+    // }
     int quantum;
     cout<<"ENTER TIME QUANTAM "<<endl;
     cin>>quantum;
     sort(pro,pro+n,sortProcess);
     findWaitingTime(pro,quantum,n);
-
+    drawGanttChart();
     free(pro);
 }

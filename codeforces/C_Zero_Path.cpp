@@ -47,42 +47,58 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 #define mod 1000000007
-void solve()
-{
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+int arr[1005][1005];
+int n,m;
+bool visited[1005][1005];
+inline bool dfs(int i,int j,int sum){
+    visited[i][j]=true;
+    sum+=arr[i][j];
+    bool flag1=false,flag2=false;
+    if((i+1)<n)
+        flag1=dfs(i+1,j,sum);
+   if((j+1)<m)
+        flag2=dfs(i,j+1,sum);
+    if(i==n-1 && j==m-1){
+        if(sum==0){
+            return true;
+        }else{
+            return false;
         }
     }
-
+    if(flag1 || flag2){
+        return true;
+    }else{
+        return false;
+    }
+}
+inline void solve()
+{
+   
+    cin>>n>>m;
+    
+    int i,j;
+    fo(i,n){
+        fo(j,m){
+            cin>>arr[i][j];
+        }
+    }
+    fo(i,n){
+        fo(j,m){
+            visited[i][j]=false;
+        }
+    }
+    if(dfs(0,0,0)){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
+    }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

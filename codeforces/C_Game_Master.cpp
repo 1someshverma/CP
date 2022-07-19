@@ -49,32 +49,30 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    	int n;
-	cin >> n;
-	vector<int> A(n);
-	vector<int> B(n);
-	vector<int> a(n), b(n);
-	for(int& x : A) cin >> x;
-	for(int& x : B) cin >> x;
-	for(int i = 0; i < n; i++) a[i] = b[i] = i;
-	sort(a.begin(), a.end(), [&](int x, int y) { return A[x] > A[y]; });
-	sort(b.begin(), b.end(), [&](int x, int y) { return B[x] > B[y]; });
-	vector<int> freq(n, 0);
-	set<int> zeroes;
-	string ans(n, '0');
-	for(int i = 0; i < n; i++){
-		freq[a[i]]++;
-		freq[b[i]]--;
-		if(freq[a[i]]) zeroes.insert(a[i]);
-		if(freq[b[i]]) zeroes.insert(b[i]);
-		if(!freq[a[i]]) zeroes.erase(a[i]);
-		if(!freq[b[i]]) zeroes.erase(b[i]);
-		if(zeroes.empty()){
-			for(int j = 0; j <= i; j++) ans[a[j]] = '1';
-			break;
+    int n;
+	cin>>n;
+	vpl p(n);
+	int i;
+	fo(i,n){
+		cin>>p[i].first;
+	}
+	fo(i,n){
+		cin>>p[i].second;
+	}
+	vl maximum(n),minimum(n);
+	string s;
+	for(int i=0;i<n;i++){
+		maximum[i]=max(p[i].first,p[i].second);
+		minimum[i]=min(p[i].first,p[i].second);
+	}
+	for(int i=0;i<n;i++){
+		if(maximum[i]>*max_element(all(minimum))){
+			s.push_back('1');
+		}else{
+			s.push_back('0');
 		}
 	}
-	cout << ans << '\n';
+	cout<<s<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

@@ -49,33 +49,68 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
+    string s;
+    cin>>s;
+    int i=-1,cnt=0,k=-1;
+    int j;
+    while(j<s.size()){
+        if(s[j]=='a' && cnt<2){
+            cnt++;
+            if(cnt==1){
+                // i=j;
+                bool flag=false;
+                while(s[j]==s[j+1] && (j+1)<s.size()){
+                     j++;
+                     flag=true;
                 }
-                return;
+                i=j;
+                // if(flag)
+                //     j=i;
+                
+            }else{
+                k=j;
             }
         }
+        j++;
     }
-
+   
+    if(cnt==0){
+        fo(j,s.size()){
+            s[j]--;
+        }
+        cout<<s<<endl;
+    }else if(cnt==1){
+        if(s.size()==1){
+            cout<<'z'<<endl;
+            return;
+        }
+        if(s[0]=='a'){
+            for(j=1;j<s.size();j++){
+                s[j]--;
+            }
+            cout<<s<<endl;
+        }else{
+            j=0;
+            while(s[j]!='a'){
+                s[j]--;
+                j++;
+            }
+        }
+    }else{
+        if(s[0]=='a'){
+        for(j=i+1;j<k;j++){
+            s[j]--;
+        }
+            cout<<s<<endl;
+        }else{
+            j=0;
+            while(s[j]!='a'){
+                s[j]--;
+                j++;
+            }
+            cout<<s<<endl;
+        }
+    }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

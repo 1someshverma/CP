@@ -49,33 +49,36 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    int n,m,k;
+    cin>>n>>m>>k;
+    int p[k];
+    int i,j;
+    fo(i,k){
+        cin>>p[i];
+    }
+    int arr[n][m];
+    int sol[n]={0};
+    fo(i,n){
+        fo(j,m){
+            cin>>arr[i][j];
         }
     }
-
+    fo(i,n){
+        int sum=0;
+        fo(j,m){
+            int pos=find(p,p+k,arr[i][j])-p+1;
+            sum+=pos;
+            rotate(p,p+pos-1,p+pos);
+            // for(int a=0;a<k;a++){
+            // cout<<p[a]<<" ";
+            // }
+            // cout<<endl;
+        }
+        
+        sol[i]=sum;
+        // cout<<"#"<<sol[i]<<endl;
+    }
+    cout<<accumulate(sol,sol+n,0)<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

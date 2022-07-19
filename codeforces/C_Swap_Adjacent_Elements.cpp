@@ -49,33 +49,49 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    ll n;
+    cin>>n;
+    vl p(n);
+     ll i;
+     fo(i,n)
+        cin>>p[i];
+    string s;
+    cin>>s;
+    ll j=0;
+    i=0;
+    while(i<n){
+        j=i;
+        if(i==n-1)
+            break;
+        while(s[i]=='0' && i!=n-1){
+            i++;
         }
+        // i--;
+        j=i;
+        while(s[j]==s[j+1] && j<n-1){
+            j++;
+        }
+        // j--;
+        sort(p.begin()+i,p.begin()+j+2);
+        j++;
+        i=j;
     }
-
+    fo(i,n)
+        cout<<p[i]<<" ";
+    // fo(i,n-1){
+    //     if(p[i]>p[i+1] && s[i]=='1')
+    //         {
+    //             swap(p[i],p[i+1]);
+    //             // ll temp=p[i];
+    //             // p[i]=p[i+1];
+    //             // p[i+1]=temp;
+    //         }
+    // }
+    // if(is_sorted(all(p))){
+    //     cout<<"YES"<<endl;
+    // }else{
+    //     cout<<"NO"<<endl;
+    // }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

@@ -49,40 +49,34 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
+    string s;
+    cin>>s;
+    if(s.length()==1){
+        cout<<"Bob "<<s[0]-'a'+1<<endl;
+    }else{
+        int ans=0;
+            for(int i=0;i<s.length();i++){
+                ans+=(s[i]-'a'+1);
             }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+        if(s.length()%2==0){
+            cout<<"Alice "<<ans<<endl;
+        }else{
+            // if(s[0]>=s[s.length()-1]){
+            //     ans-=(s[s.length()-1]-'a'+1);
+            // }else{
+            //     ans-=(s[0]-'a'+1);
+            // }
+            int x=s[0]-'a'+1,y=(s[s.length()-1]-'a'+1);
+            cout<<"Alice "<<ans-2*min(x,y)<<endl;
         }
     }
-
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

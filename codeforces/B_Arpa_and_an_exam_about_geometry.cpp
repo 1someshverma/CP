@@ -38,6 +38,8 @@ using namespace std;
 #define sortall(x) sort(all(x))
 #define tr(it, x) for(auto it = x.begin(); it != x.end(); it++)
 #define trr(it, x) for(auto it = x.rbegin(); it != x.rend(); it+)
+#define sqr(x) (ll)(x)*(x)
+#define dist(x,y,xx,yy) (sqr(x-xx)+sqr(y-yy))
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pl;
 typedef vector<int> vi;
@@ -49,33 +51,22 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
-        }
-    }
-
+    int x1,x2,x3,y1,y2,y3;
+	scanf("%d%d%d%d%d%d",&x1,&y1,&x2,&y2,&x3,&y3);
+	if ((ll)(x2-x1)*(y3-y1)==(ll)(y2-y1)*(x3-x1)){
+		puts("No"); return ;
+	}
+	puts((dist(x1,y1,x2,y2)==dist(x2,y2,x3,y3))?"Yes":"No");
+    // ll ax,ay,bx,by,cx,cy;
+    // cin>>ax>>ay>>bx>>by>>cx>>cy;
+    // float x=sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));
+    // float y=sqrt((bx-cx)*(bx-cx)+(by-cy)*(by-cy));
+    // ll z=ax*(by-cy)+bx*(cy-ay)+cx*(cy-by);
+    // if(x!=y || z==0){
+    //     cout<<"No"<<endl;
+    // }else{
+    //     cout<<"Yes"<<endl;
+    // }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

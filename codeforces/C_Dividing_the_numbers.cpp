@@ -49,33 +49,60 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    int n;
+    cin>>n;
+    if(n%4==0){
+        cout<<"0"<<endl;
+        cout<<n/2<<" ";
+        for(int i=1;i<n/2;i+=2){
+            cout<<i<<" "<<n-i+1<<" ";
         }
+       
+    }else if(n%4==1){
+        cout<<n/2<<endl;
+        for(int i=1;i<n/2;i+=2){
+            cout<<(i+1)<<" "<<n-i+1<<" ";
+        }
+    }else if(n%4==2){
+        if(n==2){
+            cout<<"1\n1 1"<<endl;
+            return ;
+        }
+        cout<<"1"<<endl;
+        cout<<n/2<<" ";
+        for(int i=1;i<n/2;i+=2){
+            cout<<(i+2)<<" "<<n-i+1<<" ";
+        }
+        cout<<"1";
+    }else{
+        if(n==3){
+            cout<<"0"<<endl;
+            cout<<"2 1 2"<<" ";
+            return;
+        }
+        cout<<"0"<<endl;
+        cout<<n/2<<" ";
+        for(int i=1;i<n/2;i+=2){
+            cout<<(i+3)<<" "<<n-i+1<<" ";
+        }
+        cout<<"3";
     }
-
+     cout<<endl;
+    // if(n%2==0){
+    //     if(n%4==0){
+    //         cout<<"0"<<endl;
+    //         cout<<n/2<<" ";
+    //         for(int i=1;i<n/2;i+=2){
+    //             cout<<i<<" "<<(n-i+1)<<" ";
+    //         }
+    //     }else{
+    //         cout<<"1"<<endl;
+    //         cout<<n/2<<" ";
+    //         for(int i=1;i<n/2;i+=2){
+    //             cout<<i<<" "<<(n-i+1)<<" ";
+    //         }
+    //     }
+    // }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);

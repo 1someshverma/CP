@@ -49,40 +49,39 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
+    int n,m;
+    cin>>n>>m;
+    vi a(n);
+    vector<char> b(m,'B');
+    int i;
+    fo(i,n)
+    {
+        cin>>a[i];
+        a[i]--;
+    }
+    fo(i,n){
+        if(a[i]<=(m-a[i]-1) && b[a[i]]=='B'){
+            b[a[i]]='A';
+        }else{
+            if(b[m-a[i]-1]=='B')
+                b[m-a[i]-1]='A';
+            else{
+                b[a[i]]='A';
             }
         }
     }
 
+    for(auto x:b){
+        cout<<x;
+    }
+    cout<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

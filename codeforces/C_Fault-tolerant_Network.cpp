@@ -49,40 +49,70 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    int n;
+    cin>>n;
+    vl p(n),q(n);
+    int i;
+    ll ans=0;
+    ll minx=INT32_MAX;
+    ll y1=0,x1=0,x2=0,y2=0;
+    ll a=0,b=0;
+    fo(i,n)
+        cin>>p[i];
+    fo(i,n)
+        cin>>q[i];
+    fo(i,n){
+        if(abs(p[0]-q[i])<minx){
+            a=i;
+            minx=abs(p[0]-q[i]);
         }
     }
-
+    x1=minx;
+    ans+=minx;
+    minx=INT32_MAX;
+    fo(i,n){
+        if(abs(p[n-1]-q[i])<=minx ){
+            b=i;
+            minx=abs(p[n-1]-q[i]);
+        }
+    }
+     y1=minx;
+    ans+=minx;
+    minx=INT32_MAX;
+    if(a!=0){
+    fo(i,n){
+        if(abs(p[i]-q[0])<minx){
+           
+            minx=abs(p[i]-q[0]);
+        }
+    }
+     x2=minx;
+    ans+=minx;
+    }
+    
+     minx=INT32_MAX;
+    if(b!=n-1){
+    fo(i,n){
+        if(abs(p[i]-q[n-1])<minx ){
+            minx=abs(p[i]-q[n-1]);
+        }
+    }
+    y2=minx;
+    ans+=minx;
+    }
+    // }
+    // ll sol=abs(p[0]-q[0])+abs(p[n-1]-q[n-1]);
+    // if(sol<=ans)
+    //     cout<<sol<<endl;
+    // else 
+        cout<<ans<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

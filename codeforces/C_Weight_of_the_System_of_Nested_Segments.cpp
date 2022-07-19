@@ -47,42 +47,57 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 #define mod 1000000007
+bool sortbysec(const pair<pair<ll,ll>,pair<ll,bool>> &a,
+              const pair<pair<ll,ll>,pair<ll,bool>> &b)
+{
+    return (a.first.second < b.first.second);
+}
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
-        }
+    ll n,m;
+    cin>>n>>m;
+    vl q;
+    vector<pair<pair<ll,ll>,pair<ll,bool>>> p(m);
+    ll i;
+    fo(i,m){
+        cin>>p[i].first.first>>p[i].first.second;
+        p[i].second.first=i+1;
+        p[i].second.second=false;
     }
-
+    sort(all(p),sortbysec);
+    ll sum=0;
+    fo(i,2*n){
+        p[i].second.second=true;
+        q.push_back(p[i].second.first);
+        sum+=p[i].first.second;
+    }
+    sort(all(q));
+    cout<<sum<<endl;
+    fo(i,n){
+        cout<<q[i]<<" "<<q[2*n-i-1]<<endl;
+    }
+    // sort(all(p));
+    // ll j=m-1;
+    // i=0;
+    // while(i<j){
+    //     while(p[i].second.second==false && i!=j && i<m-1)
+    //         i++;
+    //     while(p[j].second.second==false && i!=j && j>0)
+    //         j--;
+    //     if(i!=j)
+    //         cout<<p[i].second.first<<" "<<p[j].second.first<<endl;
+    // }
+    // // fo(i,m){
+    // //     cout<<p[i].first.first<<" "<<p[i].first.second<<endl;
+    // // }
+    cout<<endl;
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

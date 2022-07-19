@@ -49,40 +49,36 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
+   
+        // we use 'cas' because 'case' is a keyword
+        int N;
+        cin >> N;
+        int count = 0;
+        vl A(N+1,0);
+        for (int i = 1; i <= N; i++) {
+            cin >> A[i];
+        }
+        for (int i = 1; i <= N; i++) {
+            if(i > 1){
+                if(A[i] != A[i - 1]){
+                    count++;
+                    continue;
                 }
-                return;
+            }
+            if(i < N){
+                if(A[i] != A[i + 1]){
+                    count++;
+                }
             }
         }
-    }
-
+        cout << count << '\n';
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

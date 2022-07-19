@@ -49,40 +49,57 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
-            }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+    int n;
+    cin>>n;
+    vl p(n);
+    ll i;
+    fo(i,n)
+        cin>>p[i];
+    ll x,a,y,b;
+    cin>>x>>a>>y>>b;
+    int k;
+    cin>>k;
+    sort(rall(p));
+    i=a;
+    ll j=b;
+    set<ll,greater<ll>> st;
+    while (i<=n)
+    {
+        st.insert(i);
+        i+=i;
+    }
+    while(j<=n){
+        st.insert(j);
+        j+=j;
+    }
+    ll sum=0;
+    i=0;
+    bool flag=false;
+    int cnt=0;
+    while(st.size()>0){
+        ll z=*st.begin();
+        ll zz;
+        st.erase(*st.begin());
+
+        sum+=(p[cnt]/100)*x;
+        cnt++;
+        if(sum>=k){
+            flag=true;
+            break;
         }
     }
-
+    if(flag){
+        cout<<cnt<<endl;
+    }else{
+        cout<<"-1"<<endl;
+    }
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
 
     ll test=1;
-//cin>>test;
+cin>>test;
     while(test--)
     {
         solve();

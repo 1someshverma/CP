@@ -49,33 +49,37 @@ typedef vector<vl> vvl;
 #define mod 1000000007
 void solve()
 {
-    int n,a,b;
-    cin>>n>>a>>b;
-    for(int i=2;i<=min(n,256);i*=2){
-        for(int j=1;j<=n;j+=i){
-            bool flag1=false,flag2=false;
-            for(int k=j;k<(j+i);k++){
-                if(k==a)
-                    flag1=true;
-                if(k==b)
-                    flag2=true;
+    string p;
+    cin>>p;
+    vector<set<int>> str(26);
+    for(int i=0;i<p.size();i++){
+        str[p[i]-'a'].insert(i);
+    }
+    int q;
+    cin>>q;
+    while(q--){
+        int x;
+        cin>>x;
+        if(x==1){
+            int pos;
+            char c;
+            cin>>pos>>c;
+            str[p[pos-1]-'a'].erase(pos-1);
+            p[pos-1]=c;
+            str[p[pos-1]-'a'].insert(pos-1);
+        }else{
+            int l,r;
+            cin>>l>>r;
+            int cnt=0;
+            l--,r--;
+            for(int i=0;i<26;i++){
+                auto it=str[i].lower_bound(l);
+                if(it!=str[i].end() and *it<=r)
+                    cnt++;
             }
-            if(flag1 && flag2){
-                if(i==n){
-                    cout<<"Final!"<<endl;
-                }else{
-                    int cnt=0,x=i;
-                    while(x>1){
-                        x/=2;
-                        cnt++;
-                    }
-                    cout<<cnt<<endl;
-                }
-                return;
-            }
+            cout<<cnt<<endl;
         }
     }
-
 }
 int main() {
     ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
